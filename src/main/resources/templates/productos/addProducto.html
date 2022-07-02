@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+    <head th:replace="layout/layout :: head">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container-fluid" layout:fragment="page-content">            
+            <nav class="navbar navbar-light bg-light m-2">
+                <h4 class="ps-3"><i class="fa-solid fa-book me-2"></i>productos</h4>
+            </nav>
+            <div class="container mt-3">
+                <h3 th:text="${titulo}"></h3>
+                <hr>
+                <form th:action="@{/producto/save}" method="post" enctype="multipart/form-data" th:object="${producto}">    
+                    <div class="mb-3">
+                        <input type="hidden" th:field="*{id}"
+                        <label for="recipient-name" class="col-form-label">Nombre:</label>
+                        <input type="text" th:field="*{nombre}" class="form-control" name="nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">precio:</label>
+                        <input type="text" class="form-control" th:field="*{precio}" id=´precio>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('precio')}"
+                               th:errors="*{precio}"></small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">stock:</label>
+                        <input type="text" class="form-control" th:field="*{stock}" id="stock">
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('stock')}"
+                               th:errors="*{stock}"></small>
+                    </div>
+                    <div class="mb-3">                        
+                        <label for="recipient-name" class="col-form-label">laboratorio:</label>
+                        <select th:field="*{laboratorio}" id="editorial" class="form-select">
+                            <option th:each="edit:${laboratorios}" th:value="${edit.id}" th:text="${edit.nombre}"></option>
+                        </select>
+                    </div>
+                    <div class="mb-3">                        
+                        <label for="recipient-name" class="col-form-label">presentacion:</label>
+                        <select th:field="*{presentacion}" id="autor" class="form-select">
+                            <option th:each="pr:${presentaciones}" th:value="${pr.id}" th:text="${pr.descripcion}"/>
+                        </select>
+                    </div>
+                          
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Foto:</label>
+                        <input type="file" class="form-control" id="imagen" name="imagen">
+                    </div>
+                    <a th:href="@{/producto}" class="btn btn-secondary" >Cancel</a>
+                    <input type="submit" class="btn btn-primary"/>
+                </form>
+            </div>
+         </div>
+        <!--OTRO SCRIPTS PARA PAGINAS-->
+    <th:block layout:fragment="page-scripts">
+
+    </th:block>
+    </body>
+</html>

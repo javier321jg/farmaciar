@@ -1,0 +1,58 @@
+
+instalacion mysql-docker
+============================
+docker run -d -p 3307:3306 --name mysql57 -e MYSQL_ROOT_PASSWORD=secret mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+docker exec -it mysql57 mysql -uroot -p
+Host: 127.0.0.1
+User: root
+Password: secret
+Puerto: 3307
+
+Instalacion Oracle
+============================
+docker pull epiclabs/docker-oracle-xe-11g
+docker run -d -p 49162:1521 -e ORACLE_ALLOW_REMOTE=true epiclabs/docker-oracle-xe-11g
+hostname: localhost
+port: 49162
+sid: xe
+username: system
+password: oracle, root
+alter user miusuario identified by root;
+CREATE USER lp1 IDENTIFIED BY "1234567";
+GRANT ALL PRIVILEGES TO lp1;
+GRANT EXECUTE ANY PROCEDURE TO lp1;
+GRANT UNLIMITED TABLESPACE TO lp1;
+=======
+Auto-increment
+=======
+CREATE SEQUENCE sc_detalle
+START WITH 1
+INCREMENT BY 1;
+
+CREATE TRIGGER tg_detalle
+BEFORE INSERT ON detalle
+FOR EACH ROW
+BEGIN
+SELECT sc_detalle.NEXTVAL INTO :NEW.iddetalle FROM DUAL;
+END;
+
+===================================================
+docker redes
+===============
+docker network ls
+
+inspeccionar red docker
+=======================
+docker network inspect <nombre de la red>
+
+crear red con docker
+=====================
+docker network create --driver bridge <nombre de la red>
+
+desconectar contenedor de una red
+=================================
+docker network disconnect bridge mysql57
+
+agregar contenedor a la red
+docker network connect myred mysql57
+docker run -d --network prueba -p 9393:9393 ventas2020 079f1abb22f5
