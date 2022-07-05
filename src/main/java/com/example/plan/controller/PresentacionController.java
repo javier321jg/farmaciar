@@ -25,7 +25,7 @@ public class PresentacionController {
 private PresentacionService presentacionService;
 @GetMapping
 public String indexPresentacion (Model model){
-        model.addAttribute("prsentaciones", presentacionService.readAll());
+        model.addAttribute("presentaciones", presentacionService.readAll());
         return "presentaciones/listarPresentacion";
     }
  @GetMapping("/add")

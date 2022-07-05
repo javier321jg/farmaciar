@@ -28,7 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author javier_gr
  */
 @Controller
-@RequestMapping("/Producto")
+@RequestMapping("/producto")
 public class ProductoController {
     @Autowired
     private ProductoService productoService;
