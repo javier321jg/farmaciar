@@ -31,7 +31,7 @@ public class MenuController {
     
       @GetMapping("/laboratorio")
     public String indexLaboratorio(){
-        return "laboratorios/Laboratorio";
+        return "laboratorios/listarLaboratorio";
     }
     @GetMapping("/producto")
     public String indexProducto(){
